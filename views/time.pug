@@ -4,11 +4,15 @@ html
     link(rel='stylesheet', href='/public/style.css')
   body
     main
-        h3 Timestamp Microservice
-        table
-          tr
-            th Unix:
-            td=unix
-          tr
-            th UTC:
-            td=utc
+      h3 Timestamp Microservice
+      table
+        tr
+          th Unix:
+          td=unix
+        tr
+          th UTC:
+          td=utc
+    footer 
+      | This microservice accepts looks for a route parameter at /api/* and checks if it can be converted into a valid Date. 
+      | If possible, it returns the date as a Unix timestamp and a UTC string.
+      | With no route parameter, it returns information for the current date.
