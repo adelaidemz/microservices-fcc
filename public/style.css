@@ -19,6 +19,14 @@ footer {
   margin-top: 40px;
 }
 
+.button-container {
+  margin-top: 40px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 table {
   width: 70%;
   margin-left: auto;
