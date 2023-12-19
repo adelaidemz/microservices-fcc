@@ -1,8 +1,8 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: #222;
-  background-color: #fff;
+  background-color: #ECF0F1;
   text-align: center;
   line-height: 1.4em;
 }
@@ -12,9 +12,7 @@ main {
   margin-top: 40px;
 }
 
-h1, h3 {
-  margin-top: 30px;
-}
+
 
 table {
   width: 70%;
@@ -53,9 +51,22 @@ label {
 
 input {
   padding: 5px;
+  display: block;
+  position: relative;
+  margin: 10px auto;
 }
 
 input[type='text'] {
   width: 220px;
   text-align: center;
+}
+
+.view {
+  position:relative;
+  margin: auto;
+  margin-top: 40px;
+  border: 1px  solid  #aaa;
+  padding: 20px;
+  width: 60%;
+  min-width: 400px;
 }

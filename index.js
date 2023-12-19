@@ -5,6 +5,11 @@ const app = express();
 
 app.set('view engine', 'pug');
 
+// handle file uploads
+const multer  = require('multer')
+const upload = multer({ dest: 'public/uploads/' })
+const fs = require('fs');
+
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 var cors = require('cors');
 app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
@@ -56,6 +61,34 @@ app.get("/api/:date?", (req, res) => {
       res.json({ error: "Invalid Date" });
     }
   });
+
+// file metadata microservice
+app.get("/metadata", (req, res) => {
+  res.sendFile(__dirname + '/pages/filemetadata.html');
+});
+
+app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
+  const fileInfo = {
+    name: req.file.originalname,
+    type: req.file.mimetype,
+    size: req.file.size
+  };
+
+  // remove file from uploads folder
+  const uploadsFolder = __dirname + "/public/uploads/";
+  fs.readdir(uploadsFolder, (err, files) => {
+    if (err) {
+      console.log("Error reading directory:", err);
+    } else if (files.length) {
+        for (const file of files) {
+          fs.unlink(uploadsFolder + file, (err) => {
+            if (err) console.log("Error deleting file:", err)
+         })
+      }}
+  });
+  
+  res.json(fileInfo);
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
