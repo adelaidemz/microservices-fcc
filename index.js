@@ -80,14 +80,13 @@ app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
     if (err) {
       console.log("Error reading directory:", err);
     } else if (files.length) {
-        for (const file of files) {
-          fs.unlink(uploadsFolder + file, (err) => {
-            if (err) console.log("Error deleting file:", err)
-         })
-      }}
+      fs.unlink(req.file.path, (err) => {
+        if (err) console.log("Error deleting file:", err)
+      })
+    }
   });
   
-  res.json(fileInfo);
+  res.render("metadata", fileInfo);
 });
 
 const port = process.env.PORT || 3000;
